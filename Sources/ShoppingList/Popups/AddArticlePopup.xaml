@@ -1,0 +1,71 @@
+﻿<popups:PopupBase x:Class="ShoppingList.Popups.AddArticlePopup"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:popups="clr-namespace:ShoppingList.Popups.Primitives"
+		xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+		mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+		FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}">
+	<Grid>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="32"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0" Background="{StaticResource PhoneAccentBrush}">
+				<TextBlock Text="{Binding Path=LocalizedResources.AddArticlePopup_Title, Source={StaticResource LocalizedStrings}}" FontSize="20" Margin="5,2,0,0" Foreground="White" x:Name="TitleControl" />
+			</Grid>
+			<Grid Grid.Row="1" Background="{StaticResource PhoneBackgroundBrush}">
+				<Grid>
+					<StackPanel>
+						<TextBlock Text="{Binding Path=LocalizedResources.AddArticlePopup_SubTitle, Source={StaticResource LocalizedStrings}}" FontSize="30" Margin="20,20,0,15" x:Name="SubTitleControl" />
+						<TextBlock Text="{Binding Path=LocalizedResources.AddArticlePopup_ArticleControl_Label, Source={StaticResource LocalizedStrings}}" Margin="20,0,0,0" />
+						<toolkit:AutoCompleteBox Margin="7,0,7,0" x:Name="ArticleControl" TextChanged="OnArticleChanged">
+							<toolkit:AutoCompleteBox.InputScope>
+								<InputScope>
+									<InputScopeName NameValue="Text" />
+								</InputScope>
+							</toolkit:AutoCompleteBox.InputScope>
+						</toolkit:AutoCompleteBox>
+						<StackPanel x:Name="QuantityBlock">
+							<TextBlock Text="{Binding Path=LocalizedResources.AddArticlePopup_QuantityControl_Label, Source={StaticResource LocalizedStrings}}" Margin="20,0,0,0" />
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="60" />
+									<ColumnDefinition Width="7" />
+									<ColumnDefinition Width="70" />
+									<ColumnDefinition Width="7" />
+								</Grid.ColumnDefinitions>
+								<TextBox Grid.Column="0" Margin="7,0,7,0" x:Name="QuantityControl" Text="1" TextAlignment="Center" IsReadOnly="True">
+									<TextBox.InputScope>
+										<InputScope>
+											<InputScopeName NameValue="Number" />
+										</InputScope>
+									</TextBox.InputScope>
+								</TextBox>
+								<Grid Grid.Column="1" Margin="-15,0,-5,0">
+									<Button Content="-" Padding="0,0,0,6" Click="OnDecreaseClick" x:Name="DecreaseButton" />
+								</Grid>
+								<Grid Grid.Column="3" Margin="-10,0,0,0">
+									<Button Content="+" Padding="0,0,0,6" Click="OnIncreaseClick" />
+								</Grid>
+							</Grid>
+						</StackPanel>
+						<Grid Margin="7,0,7,10">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Button Grid.Column="0" Content="{Binding Path=LocalizedResources.AddArticlePopup_Button_Add, Source={StaticResource LocalizedStrings}}" Click="OnAddClick" x:Name="AddButton" />
+							<Button Grid.Column="1" Content="{Binding Path=LocalizedResources.AddArticlePopup_Button_Cancel, Source={StaticResource LocalizedStrings}}" Click="OnCancelClick" />
+						</Grid>
+					</StackPanel>
+				</Grid>
+			</Grid>
+			<Rectangle Grid.Row="2" Fill="{StaticResource PhoneBackgroundBrush}" Opacity=".5" />
+		</Grid>
+	</Grid>
+</popups:PopupBase>

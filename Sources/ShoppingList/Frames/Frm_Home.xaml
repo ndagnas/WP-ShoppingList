@@ -1,0 +1,66 @@
+﻿<phone:PhoneApplicationPage x:Class="ShoppingList.Frames.Frm_Home"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+		xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+		xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+		xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+		xmlns:localControls="clr-namespace:ShoppingList.Controls"
+		xmlns:localPhoneControls="clr-namespace:ShoppingList.Phone.Controls"
+		SupportedOrientations="Portrait" Orientation="Portrait" toolkit:TiltEffect.IsTiltEnabled="True" Loaded="OnLoaded"
+		mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480" 
+		shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0.001" shell:SystemTray.BackgroundColor="Black" shell:SystemTray.ForegroundColor="#FEFFFFFF"
+		FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}">
+	<Grid x:Name="LayoutRoot" Background="{StaticResource PhoneBackgroundBrush}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto" />
+		</Grid.RowDefinitions>
+		<Rectangle Grid.Row="0" Fill="{StaticResource PhoneAccentBrush}" VerticalAlignment="Top" Height="146" />
+		<localPhoneControls:Pivot x:Name="Home" Grid.Row="0" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Margin="0,16,0,0" Padding="0" SelectionChanged="OnPivotIndexChanged">
+            <localPhoneControls:Pivot.TitleTemplate>
+				<DataTemplate>
+					<Grid Height="30" Margin="-12,0,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="30" />
+							<ColumnDefinition Width="8" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<Image Grid.Column="0" Height="30" Source="/ShoppingList;component/Images/icon.png" />
+						<TextBlock Grid.Column="2" Text="{Binding}" FontSize="24" Foreground="White" />
+					</Grid>
+				</DataTemplate>
+            </localPhoneControls:Pivot.TitleTemplate>
+            <localPhoneControls:Pivot.HeaderTemplate>
+				<DataTemplate>
+					<Grid Margin="0,0,0,10">
+						<TextBlock Text="{Binding}" FontSize="60" Foreground="White" />
+					</Grid>
+				</DataTemplate>
+            </localPhoneControls:Pivot.HeaderTemplate>
+			<localPhoneControls:PivotItem Header="{Binding Path=LocalizedResources.HomeForm_FirstPivot_Title, Source={StaticResource LocalizedStrings}}" Margin="0">
+				<Grid>
+					<TextBlock x:Name="Label_Shopping" Text="{Binding Path=LocalizedResources.HoemForm_FirstPivot_SubTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26" FontStyle="Italic" Opacity=".5" />
+					<ScrollViewer x:Name="ScrollViewerItem_Shopping">
+						<StackPanel x:Name="ListBoxItem_Shopping" Margin="4,4,4,0">
+						</StackPanel>
+					</ScrollViewer>
+				</Grid>
+            </localPhoneControls:PivotItem>
+			<localPhoneControls:PivotItem Header="{Binding Path=LocalizedResources.HomeForm_SecondPivot_Title, Source={StaticResource LocalizedStrings}}" Margin="0">
+				<Grid>
+					<TextBlock x:Name="Label_Favories" Text="{Binding Path=LocalizedResources.HoemForm_SecondPivot_SubTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26" FontStyle="Italic" Opacity=".5" />
+					<ScrollViewer x:Name="ScrollViewerItem_Favories">
+						<StackPanel x:Name="ListBoxItem_Favories" Margin="4,4,4,0" />
+					</ScrollViewer>
+				</Grid>
+            </localPhoneControls:PivotItem>
+        </localPhoneControls:Pivot>
+		<Rectangle Grid.Row="1" Fill="{StaticResource PhoneChromeBrush}" Height="{Binding Path=ApplicationBarHeight, Source={StaticResource PhoneSizeUtils}}" />
+	</Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar IsMenuEnabled="True" Opacity=".999" />
+	</phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
